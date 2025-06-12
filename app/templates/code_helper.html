@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>KI Code-Helfer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 KI Code-Helfer</h1>
+        <form action="/" method="post">
+            <label for="code_input">Python-Code eingeben:</label><br>
+            <textarea name="code_input" required>{{ code_input or '' }}</textarea><br>
+            <button type="submit">Erklären lassen</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <h2>Antwort der KI:</h2>
+                <pre>{{ result }}</pre>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
