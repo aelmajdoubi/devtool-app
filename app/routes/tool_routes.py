@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import os
 
-router = APIRouter()
+router = APIRouter(prefix="/tool")
 templates = Jinja2Templates(directory="app/templates")
 
 @router.get("/", response_class=HTMLResponse)

@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.staticfiles import StaticFiles
+
 from app.routes import code_routes
 from app.routes import tool_routes
-
-
 
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key="super-secret-key")
