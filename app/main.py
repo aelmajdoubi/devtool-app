@@ -6,8 +6,9 @@ from app.routes import code_routes
 from app.routes import tool_routes
 
 app = FastAPI()
+app.include_router(tool_routes.router)
 app.add_middleware(SessionMiddleware, secret_key="super-secret-key")
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(code_routes.router)
-app.include_router(tool_routes.router)
+
