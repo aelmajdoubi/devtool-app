@@ -25,7 +25,7 @@ async def form_post(request: Request, code_input: str = Form(...)):
     except Exception as e:
         result = f"Fehler bei der KI-Anfrage: {e}"
 
-    return templates.TemplateResponse("code_helper.html", {
+    return templates.TemplateResponse("tool.html", {
         "request": request,
         "result": result,
         "code_input": code_input
