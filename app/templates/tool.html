@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTool – Python Formatter & Linter</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Theme</button>
+
+    <div class="container">
+        <h1>🛠️ Python DevTool</h1>
+
+        <form method="post">
+            <textarea name="code" rows="15" cols="80" placeholder="Füge hier deinen Python-Code ein..." required>{{ code }}</textarea>
+            <br><br>
+            <button name="action" value="Format">Formatieren (black)</button>
+            <button name="action" value="Lint">Lint-Check (flake8)</button>
+        </form>
+
+        <div class="output">
+            <h3>🔍 Ergebnis:</h3>
+            <pre>{{ output }}</pre>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
+            localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+        }
+
+        window.onload = () => {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark");
+            }
+        };
+    </script>
+</body>
+</html>
