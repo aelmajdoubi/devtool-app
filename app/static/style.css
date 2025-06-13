@@ -1,3 +1,32 @@
+/* Navigation oben */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-color);
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
 body {
     font-family: sans-serif;
     background: #f5f5f5;
