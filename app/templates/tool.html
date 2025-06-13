@@ -1,51 +1,64 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>DevTool – Python Formatter & Linter</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-	<script>
-      ailwind.config = {
-       darkMode: 'class',
-  }
-    </script>
+  <meta charset="UTF-8">
+  <title>DevTool</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
 </head>
-<body>
-    <nav class="navbar">
-  <a href="/" class="nav-link">🧠 KI-Assistent</a>
-  <a href="/tool" class="nav-link">🛠️ DevTool</a>
-  <button id="darkModeToggle" class="toggle-btn">🌙 Theme</button>   
-    </nav>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
 
-    <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Theme</button>
-
-    <div class="container">
-        <h1>🛠️ Python DevTool</h1>
-
-        <form method="post">
-            <textarea name="code" rows="15" cols="80" placeholder="Füge hier deinen Python-Code ein..." required>{{ code }}</textarea>
-            <br><br>
-            <button name="action" value="Format">Formatieren (black)</button>
-            <button name="action" value="Lint">Lint-Check (flake8)</button>
-        </form>
-
-        <div class="output">
-            <h3>🔍 Ergebnis:</h3>
-            <pre>{{ output }}</pre>
-        </div>
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center bg-gray-100 dark:bg-gray-800 px-6 py-4 shadow">
+    <div class="flex space-x-4">
+      <a href="/" class="font-semibold hover:underline">🧠 KI-Assistent</a>
+      <a href="/tool" class="font-semibold hover:underline">🛠️ DevTool</a>
     </div>
+    <button onclick="toggleDarkMode()" class="bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded hover:bg-gray-400 dark:hover:bg-gray-600">
+      🌙 Theme
+    </button>
+  </nav>
 
-    <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark");
-            localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
-        }
+  <!-- Main Section -->
+  <main class="max-w-2xl mx-auto mt-10 px-4">
+    <h1 class="text-3xl font-bold mb-6">🛠️ DevTool für Python</h1>
 
-        window.onload = () => {
-            if (localStorage.getItem("theme") === "dark") {
-                document.body.classList.add("dark");
-            }
-        };
-    </script>
+    <form method="post" class="space-y-4">
+      <div>
+        <label for="code" class="block font-medium mb-1">📝 Dein Python-Code:</label>
+        <textarea name="code" id="code" rows="8" class="w-full p-3 border rounded bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white" placeholder="print('Hello Brudi!')">{{ code }}</textarea>
+      </div>
+
+      <div class="flex space-x-4">
+        <button type="submit" name="action" value="Format" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">🎨 Formatieren</button>
+        <button type="submit" name="action" value="Lint" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">🔍 Prüfen (Lint)</button>
+      </div>
+    </form>
+
+    {% if output %}
+    <div class="mt-6">
+      <label class="block font-medium mb-1">💡 Ausgabe:</label>
+      <pre class="p-4 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700 text-sm overflow-x-auto">{{ output }}</pre>
+    </div>
+    {% endif %}
+  </main>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+      }
+    };
+  </script>
+
 </body>
 </html>
