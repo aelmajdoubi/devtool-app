@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>KI-Assistent</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8">
+  <title>KI-Assistent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
 </head>
-<body>
-    <nav class="navbar">
-        <a href="/" class="nav-link">🧠 KI-Assistent</a>
-        <a href="/tool" class="nav-link">🛠️ DevTool</a>
-        <button id="darkModeToggle" class="toggle-btn">🌙 Theme</button>
-    </nav>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
 
-    <div class="container">
-        <h1>🧠 Super KI-Assistent</h1>
-
-        <form action="/post" method="post">
-            <div class="form-group">
-                <label for="user_input">Deine Nachricht an die KI:</label>
-                <textarea id="user_input" name="user_input" placeholder="Stelle hier deine Frage oder gib eine Anweisung ein..." required>{{ user_input if user_input is not none else '' }}</textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit">Antwort generieren</button>
-            </div>
-        </form>
-
-        <div class="form-group">
-            <label>Antwort der KI:</label>
-            <div class="result-box">
-                {% if result is not none %}
-                    {{ result }}
-                {% else %}
-                    Deine KI-Antwort erscheint hier...
-                {% endif %}
-            </div>
-        </div>
+  <nav class="flex justify-between items-center bg-gray-100 dark:bg-gray-800 px-6 py-4 shadow">
+    <div class="flex space-x-4">
+      <a href="/" class="font-semibold hover:underline">🧠 KI-Assistent</a>
+      <a href="/tool" class="font-semibold hover:underline">🛠️ DevTool</a>
     </div>
+    <button onclick="toggleDarkMode()" class="bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded hover:bg-gray-400 dark:hover:bg-gray-600">
+      🌙 Theme
+    </button>
+  </nav>
 
-    <script>
+  <main class="max-w-2xl mx-auto mt-10 px-4">
+    <h1 class="text-3xl font-bold mb-6">🧠 Super KI-Assistent</h1>
+
+    <form action="/post" method="post" class="space-y-4">
+      <div>
+        <label for="user_input" class="block font-medium mb-1">Deine Nachricht an die KI:</label>
+        <textarea id="user_input" name="user_input" rows="6" class="w-full p-3 border rounded bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white" placeholder="Frage oder Anweisung..." required>{{ user_input if user_input is not none else '' }}</textarea>
+      </div>
+      <div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Antwort generieren</button>
+      </div>
+    </form>
+
+    <div class="mt-6">
+      <label class="block font-medium mb-1">Antwort der KI:</label>
+      <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700">
+        {% if result is not none %}
+          {{ result }}
+        {% else %}
+          <em class="text-gray-500">Deine KI-Antwort erscheint hier...</em>
+        {% endif %}
+      </div>
+    </div>
+  </main>
+
+  <script>
     function toggleDarkMode() {
-        document.body.classList.toggle("dark");
-        localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
     }
 
     window.onload = () => {
-        if (localStorage.getItem("theme") === "dark") {
-            document.body.classList.add("dark");
-        }
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+      }
     };
-    </script>
+  </script>
+
 </body>
 </html>
