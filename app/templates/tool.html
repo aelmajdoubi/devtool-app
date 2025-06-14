@@ -53,3 +53,18 @@
     </script>
 </body>
 </html>
+{% if history %}
+    <div class="mt-6">
+        <h2 class="text-lg font-bold mb-2">🕓 Letzte Aktionen:</h2>
+        <ul class="list-disc pl-5 space-y-2">
+            {% for entry in history %}
+                <li>
+                    <span class="font-semibold">{{ entry.action }}</span> •
+                    {{ entry.timestamp.strftime("%d.%m.%Y %H:%M") }} <br>
+                    <code class="block bg-gray-100 dark:bg-gray-800 p-2 rounded text-sm">{{ entry.code[:100] }}...</code>
+                    <div class="text-xs text-gray-500">{{ entry.result[:80] }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
